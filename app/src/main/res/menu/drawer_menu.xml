@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragmentService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="SimpleServiceFragment" />
+    <item
+        android:id="@+id/fragmentIntentService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="IntentServiceFragment" />
+    <item
+        android:id="@+id/fragmentIntentJobService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="IntentJobServiceFragment" />
+    <item
+        android:id="@+id/fragmentJoService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="JobServiceFragment" />
+</menu>

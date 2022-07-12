@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_mobile"
+    app:startDestination="@id/fragmentService">
+
+    <fragment
+        android:id="@+id/fragmentService"
+        android:name="ru.eyelog.testservice.presenter.simpleservice.SimpleServiceFragment"
+        android:label="SimpleServiceFragment" />
+    <fragment
+        android:id="@+id/fragmentIntentService"
+        android:name="ru.eyelog.testservice.presenter.intentservice.IntentServiceFragment"
+        android:label="IntentServiceFragment" />
+    <fragment
+        android:id="@+id/fragmentIntentJobService"
+        android:name="ru.eyelog.testservice.presenter.intentjobservice.IntentJobServiceFragment"
+        android:label="IntentJobServiceFragment" />
+    <fragment
+        android:id="@+id/fragmentJoService"
+        android:name="ru.eyelog.testservice.presenter.jobservice.JobServiceFragment"
+        android:label="JobServiceFragment" />
+</navigation>
