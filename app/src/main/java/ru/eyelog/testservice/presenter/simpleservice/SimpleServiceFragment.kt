@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_service.buttonStart
-import kotlinx.android.synthetic.main.fragment_service.buttonStop
+import kotlinx.android.synthetic.main.fragment_service.*
 import ru.eyelog.testservice.R
 import ru.eyelog.testservice.services.CustomService
 
@@ -26,6 +25,8 @@ class SimpleServiceFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         buttonStart.setOnClickListener {
             requireContext().startService(Intent(requireContext(), CustomService::class.java))
         }
@@ -33,5 +34,9 @@ class SimpleServiceFragment: Fragment() {
         buttonStop.setOnClickListener {
             requireContext().stopService(Intent(requireContext(), CustomService::class.java))
         }
+    }
+
+    private fun setMessage(value: String){
+        tvTitle.text = value
     }
 }
