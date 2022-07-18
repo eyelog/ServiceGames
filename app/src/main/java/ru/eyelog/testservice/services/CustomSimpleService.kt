@@ -1,6 +1,7 @@
 package ru.eyelog.testservice.services
 
 import android.app.Service
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
@@ -28,17 +29,18 @@ class CustomSimpleService: Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.i("Logcat", "Service started")
-
         setCustomMessage("Start")
+        messageGenerator()
+        return START_STICKY
+    }
 
+    private fun messageGenerator(){
         messageDisposable = Observable.interval(1000L, TimeUnit.MILLISECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 messageCounter++
                 setCustomMessage("Message $messageCounter")
             }
-
-        return START_STICKY
     }
 
     override fun onUnbind(intent: Intent?): Boolean {

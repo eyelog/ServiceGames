@@ -26,7 +26,8 @@
         <service
             android:name=".services.CustomSimpleService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true"
+            android:stopWithTask="false"/>
         <service
             android:name=".services.CustomForegroundService"
             android:enabled="true"
