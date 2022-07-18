@@ -75,8 +75,8 @@ class SimpleServiceFragment: Fragment() {
         } catch (e: IllegalArgumentException) {
             Log.e("Broadcast", "Time tick Receiver not registered", e)
         }
-        requireContext().unbindService(serviceConnection)
-        requireContext().stopService(Intent(requireContext(), CustomService::class.java))
+//        requireContext().unbindService(serviceConnection)
+//        requireContext().stopService(Intent(requireContext(), CustomService::class.java))
     }
 
     private fun setMessage(value: String){
