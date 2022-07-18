@@ -31,12 +31,6 @@
             android:name=".services.CustomJobService"
             android:enabled="true"
             android:exported="true"/>
-
-<!--        <receiver android:name=".CustomBroadcastReceiver"  android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="ru.eyelog.testservice.services"/>-->
-<!--            </intent-filter>-->
-<!--        </receiver>-->
     </application>
 
 </manifest>
