@@ -34,9 +34,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.fragmentService,
-                R.id.fragmentIntentService,
-                R.id.fragmentIntentJobService,
-                R.id.fragmentJoService
+                R.id.fragmentForegroundService,
             ),
             drawerLayout
         )

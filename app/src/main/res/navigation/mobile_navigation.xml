@@ -9,15 +9,7 @@
         android:name="ru.eyelog.testservice.presenter.simpleservice.SimpleServiceFragment"
         android:label="SimpleServiceFragment" />
     <fragment
-        android:id="@+id/fragmentIntentService"
-        android:name="ru.eyelog.testservice.presenter.intentservice.IntentServiceFragment"
-        android:label="IntentServiceFragment" />
-    <fragment
-        android:id="@+id/fragmentIntentJobService"
-        android:name="ru.eyelog.testservice.presenter.intentjobservice.IntentJobServiceFragment"
-        android:label="IntentJobServiceFragment" />
-    <fragment
-        android:id="@+id/fragmentJoService"
-        android:name="ru.eyelog.testservice.presenter.jobservice.JobServiceFragment"
-        android:label="JobServiceFragment" />
+        android:id="@+id/fragmentForegroundService"
+        android:name="ru.eyelog.testservice.presenter.foreground.ForegroundServiceFragment"
+        android:label="ForegroundServiceFragment" />
 </navigation>

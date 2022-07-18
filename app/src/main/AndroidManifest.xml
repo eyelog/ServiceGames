@@ -24,13 +24,14 @@
         </activity>
 
         <service
-            android:name=".services.CustomService"
+            android:name=".services.CustomSimpleService"
             android:enabled="true"
             android:exported="true"/>
         <service
-            android:name=".services.CustomJobService"
+            android:name=".services.CustomForegroundService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true"
+            android:stopWithTask="false"/>
     </application>
 
 </manifest>

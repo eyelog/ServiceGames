@@ -1,7 +1,8 @@
-package ru.eyelog.testservice.presenter.simpleservice
+package ru.eyelog.testservice.presenter.foreground
 
+import android.app.ActivityManager
 import android.content.*
-import android.content.Context.BIND_AUTO_CREATE
+import android.content.Context.ACTIVITY_SERVICE
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
@@ -12,18 +13,19 @@ import androidx.fragment.app.Fragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_service.*
 import ru.eyelog.testservice.R
-import ru.eyelog.testservice.services.CustomSimpleService
+import ru.eyelog.testservice.services.CustomForegroundService
 
-private const val BROADCAST_ACTION = "ru.eyelog.testservice.presenter.simpleservice"
+
+private const val BROADCAST_ACTION = "ru.eyelog.testservice.presenter.foreground"
 
 @AndroidEntryPoint
-class SimpleServiceFragment: Fragment() {
+class ForegroundServiceFragment: Fragment() {
 
     private var serviceBound = false
 
     private val tickReceiver by lazy { makeBroadcastReceiver() }
     lateinit var serviceConnection: ServiceConnection
-    lateinit var customService: CustomSimpleService
+    lateinit var customService: CustomForegroundService
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,12 +39,13 @@ class SimpleServiceFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         buttonStart.setOnClickListener {
-            requireContext().startService(Intent(requireContext(), CustomSimpleService::class.java))
+            if (requireContext().isServiceRunning<CustomForegroundService>()) {
+                requireContext().startForegroundService(Intent(requireContext(), CustomForegroundService::class.java))
+            }
         }
 
         buttonStop.setOnClickListener {
-            requireContext().unbindService(serviceConnection)
-            requireContext().stopService(Intent(requireContext(), CustomSimpleService::class.java))
+            dropAllStaff()
         }
 
         btToggleService.setOnClickListener {
@@ -52,10 +55,10 @@ class SimpleServiceFragment: Fragment() {
         val intentFilter = IntentFilter(BROADCAST_ACTION)
         requireContext().registerReceiver(tickReceiver, intentFilter)
 
-        val binderIntent = Intent(requireContext(), CustomSimpleService::class.java)
-        serviceConnection = object : ServiceConnection{
+        val binderIntent = Intent(requireContext(), CustomForegroundService::class.java)
+        serviceConnection = object : ServiceConnection {
             override fun onServiceConnected(p0: ComponentName?, service: IBinder?) {
-                val binder = service as CustomSimpleService.CustomSimpleBinder
+                val binder = service as CustomForegroundService.CustomForegroundBinder
                 customService = binder.getService()
                 serviceBound = true
             }
@@ -65,22 +68,21 @@ class SimpleServiceFragment: Fragment() {
             }
         }
 
-        requireContext().bindService(binderIntent, serviceConnection, BIND_AUTO_CREATE)
+        requireContext().bindService(binderIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun dropAllStaff(){
         try {
             requireContext().unregisterReceiver(tickReceiver)
         } catch (e: IllegalArgumentException) {
             Log.e("Broadcast", "Time tick Receiver not registered", e)
         }
         requireContext().unbindService(serviceConnection)
-        requireContext().stopService(Intent(requireContext(), CustomSimpleService::class.java))
+        requireContext().stopService(Intent(requireContext(), CustomForegroundService::class.java))
     }
 
     private fun setMessage(value: String){
-        tvTitle.text = value
+        tvTitle?.text = value
     }
 
     private fun makeBroadcastReceiver(): BroadcastReceiver {
@@ -95,4 +97,9 @@ class SimpleServiceFragment: Fragment() {
             }
         }
     }
+
+    private inline fun <reified T> Context.isServiceRunning() =
+        (getSystemService(ACTIVITY_SERVICE) as ActivityManager)
+            .getRunningServices(Integer.MAX_VALUE)
+            .any { it.service.className == T::class.java.name }
 }

@@ -10,9 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
 
-class CustomService: Service() {
+class CustomSimpleService: Service() {
 
-    private val customBinder = CustomBinder()
+    private val customBinder = CustomSimpleBinder()
     private var messageDisposable: Disposable? = null
     private var messageCounter = 0
 
@@ -65,7 +65,7 @@ class CustomService: Service() {
         super.onDestroy()
     }
 
-    inner class CustomBinder: Binder(){
-        fun getService(): CustomService = this@CustomService
+    inner class CustomSimpleBinder: Binder(){
+        fun getService(): CustomSimpleService = this@CustomSimpleService
     }
 }
