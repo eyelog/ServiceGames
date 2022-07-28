@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBar(navController, appBarConfiguration)
         setupNavigationMenu(navController)
+
+        if (intent.getStringExtra("TargetFragment") == "SimpleAlarmFragment"){
+            navController.navigate(R.id.fragmentSimpleAlarm)
+        }
     }
 
     private fun setupNavigationMenu(navController: NavController) {
