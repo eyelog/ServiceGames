@@ -75,7 +75,9 @@ class SimpleServiceFragment: Fragment() {
         } catch (e: IllegalArgumentException) {
             Log.e("Broadcast", "Time tick Receiver not registered", e)
         }
-        requireContext().unbindService(serviceConnection)
+        if (serviceBound){
+            requireContext().unbindService(serviceConnection)
+        }
         requireContext().stopService(Intent(requireContext(), CustomSimpleService::class.java))
     }
 
@@ -83,6 +85,7 @@ class SimpleServiceFragment: Fragment() {
         tvTitle.text = value
     }
 
+    // Для получения посылок от службы
     private fun makeBroadcastReceiver(): BroadcastReceiver {
         return object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {

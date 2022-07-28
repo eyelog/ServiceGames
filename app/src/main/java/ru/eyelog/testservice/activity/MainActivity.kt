@@ -35,6 +35,9 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.fragmentService,
                 R.id.fragmentForegroundService,
+                R.id.fragmentIntentService,
+                R.id.fragmentJobService,
+                R.id.fragmentSimpleAlarm,
             ),
             drawerLayout
         )

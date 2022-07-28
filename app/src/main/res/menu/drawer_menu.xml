@@ -10,4 +10,16 @@
         android:id="@+id/fragmentForegroundService"
         android:icon="@drawable/ic_menu_list"
         android:title="ForegroundServiceFragment" />
+    <item
+        android:id="@+id/fragmentIntentService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="IntentServiceFragment" />
+    <item
+        android:id="@+id/fragmentJobService"
+        android:icon="@drawable/ic_menu_list"
+        android:title="JobServiceFragment" />
+    <item
+        android:id="@+id/fragmentSimpleAlarm"
+        android:icon="@drawable/ic_menu_list"
+        android:title="SimpleAlarmFragment" />
 </menu>

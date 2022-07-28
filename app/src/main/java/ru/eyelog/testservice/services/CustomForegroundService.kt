@@ -19,7 +19,7 @@ private const val CHANNEL_ID = "Foreground service id"
 
 class CustomForegroundService: Service() {
 
-    private val customBinder = CustomForegroundBinder()
+//    private val customBinder = CustomForegroundBinder()
     private var messageDisposable: Disposable? = null
     private var messageCounter = 0
 
@@ -28,9 +28,10 @@ class CustomForegroundService: Service() {
         super.onCreate()
     }
 
-    override fun onBind(p0: Intent?): IBinder {
+    override fun onBind(p0: Intent?): IBinder? {
         Log.i("Logcat", "Service onBind")
-        return customBinder
+//        return customBinder
+        return null
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -61,10 +62,10 @@ class CustomForegroundService: Service() {
         return START_STICKY
     }
 
-    override fun onUnbind(intent: Intent?): Boolean {
-        Log.i("Logcat", "Service onUnbind")
-        return super.onUnbind(intent)
-    }
+//    override fun onUnbind(intent: Intent?): Boolean {
+//        Log.i("Logcat", "Service onUnbind")
+//        return super.onUnbind(intent)
+//    }
 
     private fun setCustomMessage(value: String){
         val sendIntent = Intent()
@@ -73,10 +74,10 @@ class CustomForegroundService: Service() {
         sendBroadcast(sendIntent)
     }
 
-    fun setMessageCounter(value: Int) {
-        Log.i("Logcat", "setCustomMessage")
-        messageCounter = value
-    }
+//    fun setMessageCounter(value: Int) {
+//        Log.i("Logcat", "setCustomMessage")
+//        messageCounter = value
+//    }
 
     override fun onDestroy() {
         Log.i("Logcat", "Service destroyed")
@@ -84,7 +85,7 @@ class CustomForegroundService: Service() {
         super.onDestroy()
     }
 
-    inner class CustomForegroundBinder: Binder(){
-        fun getService(): CustomForegroundService = this@CustomForegroundService
-    }
+//    inner class CustomForegroundBinder: Binder(){
+//        fun getService(): CustomForegroundService = this@CustomForegroundService
+//    }
 }

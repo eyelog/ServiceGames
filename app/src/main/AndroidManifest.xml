@@ -4,6 +4,9 @@
     package="ru.eyelog.testservice">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -33,6 +36,19 @@
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="false"/>
+        <service
+            android:name=".services.CustomIntentService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false"/>
+        <receiver
+            android:name=".receivers.CustomBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+        <receiver
+            android:name=".receivers.SimpleAlarmBroadcastReceiver"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

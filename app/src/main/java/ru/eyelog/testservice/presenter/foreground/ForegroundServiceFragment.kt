@@ -21,11 +21,11 @@ private const val BROADCAST_ACTION = "ru.eyelog.testservice.presenter.foreground
 @AndroidEntryPoint
 class ForegroundServiceFragment: Fragment() {
 
-    private var serviceBound = false
+//    private var serviceBound = false
 
     private val tickReceiver by lazy { makeBroadcastReceiver() }
-    lateinit var serviceConnection: ServiceConnection
-    lateinit var customService: CustomForegroundService
+//    lateinit var serviceConnection: ServiceConnection
+//    lateinit var customService: CustomForegroundService
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +39,7 @@ class ForegroundServiceFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         buttonStart.setOnClickListener {
-            if (requireContext().isServiceRunning<CustomForegroundService>()) {
+            if (!requireContext().isServiceRunning<CustomForegroundService>()) {
                 requireContext().startForegroundService(Intent(requireContext(), CustomForegroundService::class.java))
             }
         }
@@ -48,27 +48,27 @@ class ForegroundServiceFragment: Fragment() {
             dropAllStaff()
         }
 
-        btToggleService.setOnClickListener {
-            customService.setMessageCounter(100)
-        }
+//        btToggleService.setOnClickListener {
+//            customService.setMessageCounter(100)
+//        }
 
         val intentFilter = IntentFilter(BROADCAST_ACTION)
         requireContext().registerReceiver(tickReceiver, intentFilter)
 
-        val binderIntent = Intent(requireContext(), CustomForegroundService::class.java)
-        serviceConnection = object : ServiceConnection {
-            override fun onServiceConnected(p0: ComponentName?, service: IBinder?) {
-                val binder = service as CustomForegroundService.CustomForegroundBinder
-                customService = binder.getService()
-                serviceBound = true
-            }
-
-            override fun onServiceDisconnected(p0: ComponentName?) {
-                serviceBound = false
-            }
-        }
-
-        requireContext().bindService(binderIntent, serviceConnection, Context.BIND_AUTO_CREATE)
+//        val binderIntent = Intent(requireContext(), CustomForegroundService::class.java)
+//        serviceConnection = object : ServiceConnection {
+//            override fun onServiceConnected(p0: ComponentName?, service: IBinder?) {
+//                val binder = service as CustomForegroundService.CustomForegroundBinder
+//                customService = binder.getService()
+//                serviceBound = true
+//            }
+//
+//            override fun onServiceDisconnected(p0: ComponentName?) {
+//                serviceBound = false
+//            }
+//        }
+//
+//        requireContext().bindService(binderIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
     private fun dropAllStaff(){
@@ -77,7 +77,7 @@ class ForegroundServiceFragment: Fragment() {
         } catch (e: IllegalArgumentException) {
             Log.e("Broadcast", "Time tick Receiver not registered", e)
         }
-        requireContext().unbindService(serviceConnection)
+//        requireContext().unbindService(serviceConnection)
         requireContext().stopService(Intent(requireContext(), CustomForegroundService::class.java))
     }
 

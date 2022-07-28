@@ -35,7 +35,7 @@ class CustomSimpleService: Service() {
     }
 
     private fun messageGenerator(){
-        messageDisposable = Observable.interval(1000L, TimeUnit.MILLISECONDS)
+        messageDisposable = Observable.interval(1L, TimeUnit.SECONDS)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 messageCounter++
